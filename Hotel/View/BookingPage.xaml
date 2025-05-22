@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.View.BookingPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15">
+            <Label Text="Room ID" />
+            <Entry Keyboard="Numeric" Text="{Binding RoomId}" />
+
+            <Label Text="Price" />
+            <Entry Keyboard="Numeric" Text="{Binding Price}" />
+
+            <Label Text="Cost" />
+            <Entry Keyboard="Numeric" Text="{Binding Cost}" />
+
+            <Label Text="Start Date" />
+            <DatePicker Date="{Binding StartDate}" />
+
+            <Label Text="End Date" />
+            <DatePicker Date="{Binding EndDate}" />
+
+            <Label Text="Comment" />
+            <Editor Text="{Binding Comment}" AutoSize="TextChanges" />
+
+            <Label Text="Main Person" />
+            <Entry Text="{Binding MainPerson}" />
+
+            <Label Text="Contact Email" />
+            <Entry Text="{Binding ContactEmail}" />
+
+            <Label Text="Contact Info" FontAttributes="Bold" FontSize="Medium" />
+
+            <Label Text="Phone" />
+            <Entry Text="{Binding Phone}" />
+
+            <Label Text="Email" />
+            <Entry Text="{Binding Email}" />
+
+            <Label Text="FIO" />
+            <Entry Text="{Binding Fio}" />
+
+            <Label Text="Sex" />
+            <Entry Text="{Binding Sex}" />
+
+            <Label Text="Citizenship" />
+            <Entry Text="{Binding Citizenship}" />
+
+            <Label Text="Birthday" />
+            <DatePicker Date="{Binding Birthday}" />
+
+            <Label Text="Passport Number" />
+            <Entry Text="{Binding PassportNumber}" />
+
+            <Label Text="Passport Date" />
+            <DatePicker Date="{Binding PassportDate}" />
+
+            <Label Text="Passport Expiry Date" />
+            <DatePicker Date="{Binding PassDateEnd}" />
+
+            <Label Text="Registration Address" />
+            <Editor Text="{Binding Registration}" AutoSize="TextChanges" />
+
+            <Button Text="Submit" Command="{Binding SubmitCommand}" />
+            <Label Text="{Binding Status}" TextColor="Green" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
