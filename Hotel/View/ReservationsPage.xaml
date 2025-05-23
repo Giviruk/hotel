@@ -8,49 +8,27 @@
             <DataTemplate>
                 <Frame Margin="10" Padding="10" BorderColor="Gray">
                     <VerticalStackLayout>
-                        <Label Text="{Binding MainPerson}" FontAttributes="Bold" FontSize="16" />
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Room: " />
-                                    <Span Text="{Binding RoomId}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Dates: " />
-                                    <Span Text="{Binding StartDate, StringFormat='{0:d}'}" />
-                                    <Span Text=" - " />
-                                    <Span Text="{Binding EndDate, StringFormat='{0:d}'}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Contact: " />
-                                    <Span Text="{Binding DecryptedContactInfo.Fio}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Phone: " />
-                                    <Span Text="{Binding DecryptedContactInfo.Phone}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Email: " />
-                                    <Span Text="{Binding DecryptedContactInfo.Email}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                        <Label Text="{Binding Id, StringFormat='ID Бронирования: {0}'}" />
+                        <Label Text="{Binding RoomId, StringFormat='Комната: {0}'}" />
+                        <Label Text="{Binding Price, StringFormat='Цена за день: {0:F2}'}" />
+                        <Label Text="{Binding Cost, StringFormat='Общая стоимость: {0:F2}'}" />
+                        <Label Text="{Binding StartDate, StringFormat='Начало бронирования: {0:yyyy-MM-dd HH:mm}'}" />
+                        <Label Text="{Binding EndDate, StringFormat='Конец бронирования: {0:yyyy-MM-dd HH:mm}'}" />
+                        <Label Text="{Binding MainPerson, StringFormat='Количество человек: {0}'}" />
+                        <Label Text="{Binding ContactEmail, StringFormat='Email: {0}'}" />
+                        <Label Text="{Binding Comment, StringFormat='Комментарий: {0}'}" />
+
+                        <Label Text="Контактная информация" FontAttributes="Bold" />
+                        <Label Text="{Binding DecryptedContactInfo.Fio, StringFormat='ФИО: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Phone, StringFormat='Телефон: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Email, StringFormat='Email: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Sex, StringFormat='Пол: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Citizenship, StringFormat='Прописка: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Registration, StringFormat='Адресс: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.Birthday, StringFormat='Дата Рождения: {0:yyyy-MM-dd}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.PassportNumber, StringFormat='Номер паспорта: {0}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.PassportDate, StringFormat='Дата выдачи: {0:yyyy-MM-dd}'}" />
+                        <Label Text="{Binding DecryptedContactInfo.PassDateEnd, StringFormat='Годен до: {0:yyyy-MM-dd}'}" />
                     </VerticalStackLayout>
                 </Frame>
             </DataTemplate>

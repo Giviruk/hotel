@@ -5,63 +5,63 @@
              x:Class="Hotel.View.BookingPage">
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="15">
-            <Label Text="Room ID" />
+            <Label Text="ID комнаты" />
             <Entry Keyboard="Numeric" Text="{Binding RoomId}" />
 
-            <Label Text="Price" />
+            <Label Text="Стоимость за 1 день" />
             <Entry Keyboard="Numeric" Text="{Binding Price}" />
 
-            <Label Text="Cost" />
+            <Label Text="Общая стоимость" />
             <Entry Keyboard="Numeric" Text="{Binding Cost}" />
 
-            <Label Text="Start Date" />
+            <Label Text="Дата начала бронирования" />
             <DatePicker Date="{Binding StartDate}" />
 
-            <Label Text="End Date" />
+            <Label Text="Дата окончания бронирования" />
             <DatePicker Date="{Binding EndDate}" />
 
-            <Label Text="Comment" />
+            <Label Text="комментарий" />
             <Editor Text="{Binding Comment}" AutoSize="TextChanges" />
 
-            <Label Text="Main Person" />
+            <Label Text="Количество человек" />
             <Entry Text="{Binding MainPerson}" />
 
-            <Label Text="Contact Email" />
+            <Label Text="Email для связи" />
             <Entry Text="{Binding ContactEmail}" />
 
-            <Label Text="Contact Info" FontAttributes="Bold" FontSize="Medium" />
+            <Label Text="Контактная информация" FontAttributes="Bold" FontSize="Medium" />
 
-            <Label Text="Phone" />
+            <Label Text="Номер телефона" />
             <Entry Text="{Binding Phone}" />
 
             <Label Text="Email" />
             <Entry Text="{Binding Email}" />
 
-            <Label Text="FIO" />
+            <Label Text="ФИО" />
             <Entry Text="{Binding Fio}" />
 
-            <Label Text="Sex" />
+            <Label Text="Пол" />
             <Entry Text="{Binding Sex}" />
 
-            <Label Text="Citizenship" />
+            <Label Text="Гражданство" />
             <Entry Text="{Binding Citizenship}" />
 
-            <Label Text="Birthday" />
+            <Label Text="Дата рождения" />
             <DatePicker Date="{Binding Birthday}" />
 
-            <Label Text="Passport Number" />
+            <Label Text="Номер паспорта" />
             <Entry Text="{Binding PassportNumber}" />
 
-            <Label Text="Passport Date" />
+            <Label Text="Дата выдачи паспорта" />
             <DatePicker Date="{Binding PassportDate}" />
 
-            <Label Text="Passport Expiry Date" />
+            <Label Text="Годен до" />
             <DatePicker Date="{Binding PassDateEnd}" />
 
-            <Label Text="Registration Address" />
+            <Label Text="Адрес" />
             <Editor Text="{Binding Registration}" AutoSize="TextChanges" />
 
-            <Button Text="Submit" Command="{Binding SubmitCommand}" />
+            <Button Text="Забронировать" Command="{Binding SubmitCommand}" />
             <Label Text="{Binding Status}" TextColor="Green" />
         </VerticalStackLayout>
     </ScrollView>
