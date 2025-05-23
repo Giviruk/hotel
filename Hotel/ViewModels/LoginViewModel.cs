@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Text.Json;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,11 +19,15 @@ public partial class LoginViewModel : ObservableObject
 
     private readonly HttpClient _httpClient;
     private readonly BookingPage _bookingPage;
+    private readonly CookieContainer _cookieContainer;
+    private readonly IRsaEncryptionService rsaEncryptionService;
 
-    public LoginViewModel(HttpClient httpClient, BookingPage bookingPage)
+    public LoginViewModel(HttpClient httpClient, BookingPage bookingPage, CookieContainer cookieContainer, IRsaEncryptionService rsaEncryptionService)
     {
         _httpClient = httpClient;
         _bookingPage = bookingPage;
+        _cookieContainer = cookieContainer;
+        this.rsaEncryptionService = rsaEncryptionService;
     }
 
     public ICommand LoginCommand => new AsyncRelayCommand(LoginAsync);
@@ -31,15 +36,18 @@ public partial class LoginViewModel : ObservableObject
     {
         Status = string.Empty;
 
-        var payload = new { username = Username, password = Password };
-        var json = JsonSerializer.Serialize(payload);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-
+        var content = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("username", username),
+            new KeyValuePair<string, string>("password", password)
+        });
+        
         try
         {
-            var response = await _httpClient.PostAsync("/login", content);
+            var response = await _httpClient.PostAsync("/usercheck", content);// Авторизация прошла успешно
+            var cookies = _cookieContainer.GetCookies(new Uri("http://10.0.2.2:8090"));
 
-            if (response.IsSuccessStatusCode)
+            if (!response.RequestMessage.RequestUri.Query.Contains("error"))
             {
                 Status = "Login successful";
 
@@ -63,11 +71,12 @@ public partial class LoginViewModel : ObservableObject
                     await SecureKeyStore.SavePrivateKeyAsync(inputKey);
                 }
 
+                await rsaEncryptionService.LoadKey();
                 await Navigation.PushAsync(_bookingPage);
             }
             else
             {
-                //Status = "Login failed: " + response.StatusCode;
+                Status = "Login failed: " + response.StatusCode;
             }
         }
         catch (Exception ex)

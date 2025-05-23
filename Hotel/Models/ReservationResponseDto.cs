@@ -1,13 +1,13 @@
 ﻿namespace Hotel.Models;
 
 public record ReservationResponseDto(
-    long Id,
-    long RoomId,
-    float Price,
-    float Cost,
-    DateTime StartDate,
-    DateTime EndDate,
-    string Comment,
-    string MainPerson,
-    string ContactInfo,
-    string ContactEmail);
+    long id,
+    long roomId,
+    float price,
+    float cost,
+    DateTime? StartDate,
+    DateTime? EndDate,
+    string comment,
+    string mainPerson,
+    string contactInfo,
+    string contactEmail);

@@ -5,15 +5,8 @@ namespace Hotel.Services;
 
 public class RsaEncryptionService : IRsaEncryptionService
 {
-    private readonly RSA _rsa;
-    
-    public RsaEncryptionService()
-    {
-        _rsa = RSA.Create();
+    private RSA _rsa;
 
-        var key = SecureKeyStore.LoadPrivateKeyAsync().Result;
-        _rsa.ImportFromPem(key.ToCharArray());
-    }
 
     public string Encrypt(string plaintext)
     {
@@ -54,7 +47,14 @@ public class RsaEncryptionService : IRsaEncryptionService
         var plainBytes = decryptor.TransformFinalBlock(data, 0, data.Length);
         return Encoding.UTF8.GetString(plainBytes);
     }
-    
+
+    public async Task LoadKey()
+    {
+        _rsa = RSA.Create();
+        var key = await SecureKeyStore.LoadPrivateKeyAsync();
+        _rsa.ImportFromPem(key.ToCharArray());
+    }
+
     private class EncryptedPackage
     {
         public string Key { get; set; } = string.Empty;

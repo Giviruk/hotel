@@ -27,14 +27,14 @@ public partial class ReservationsViewModel : ObservableObject
     {
         try
         {
-            var response = await _httpClient.GetAsync("/reservations");
+            var response = await _httpClient.GetAsync("/hcont/api/v1/reservation");
             response.EnsureSuccessStatusCode();
             var json = response.Content.ReadAsStringAsync().Result;
                 var list = JsonSerializer.Deserialize<List<ReservationResponseDto>>(json);
             Reservations.Clear();
             foreach (var item in list)
             {
-                var decryptedJson = _rsa.Decrypt(item.ContactInfo);
+                var decryptedJson = _rsa.Decrypt(item.contactInfo);
                 var contact = JsonSerializer.Deserialize<ContactInfo>(decryptedJson);
                 Reservations.Add(new ReservationDisplay(item, contact));
             }
@@ -49,14 +49,14 @@ public partial class ReservationsViewModel : ObservableObject
     {
         public long RoomId { get; }
         public string MainPerson { get; }
-        public DateTime StartDate { get; }
-        public DateTime EndDate { get; }
+        public DateTime? StartDate { get; }
+        public DateTime? EndDate { get; }
         public ContactInfo DecryptedContactInfo { get; }
 
         public ReservationDisplay(ReservationResponseDto dto, ContactInfo contact)
         {
-            RoomId = dto.RoomId;
-            MainPerson = dto.MainPerson;
+            RoomId = dto.roomId;
+            MainPerson = dto.mainPerson;
             StartDate = dto.StartDate;
             EndDate = dto.EndDate;
             DecryptedContactInfo = contact;

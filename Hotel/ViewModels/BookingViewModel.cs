@@ -67,7 +67,7 @@ public partial class BookingViewModel : ObservableObject
 
         try
         {
-            var response = await _httpClient.PostAsync("/book-table", content);
+            var response = await _httpClient.PostAsync("/hcont/api/v1/reservation", content);
             Status = response.IsSuccessStatusCode ? "Booking successful" : "Booking failed: " + response.StatusCode;
         }
         catch (Exception ex)

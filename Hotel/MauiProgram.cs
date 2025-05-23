@@ -31,17 +31,20 @@ public static class  MauiProgram
         builder.Services.AddSingleton<ReservationsViewModel>();
         builder.Services.AddSingleton<IRsaEncryptionService, RsaEncryptionService>();
 
+        var container = new CookieContainer();
+        
         var handler = new HttpClientHandler
         {
             UseCookies = true,
-            CookieContainer = new CookieContainer(),
+            CookieContainer = container,
         };
         var client = new HttpClient(handler)
         {
-            BaseAddress = new Uri("https://your.api")
+            BaseAddress = new Uri("http://10.0.2.2:8090")
         };
         builder.Services.AddSingleton(client);
-
+        builder.Services.AddSingleton(container);
+        builder.Services.AddSingleton(handler);
 
         return builder.Build();
     }
