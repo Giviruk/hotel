@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Hotel.View.UpdateReservationStatusPopup"
+             Title="Изменить статус брони"
+             BackgroundColor="#80000000" 
+             Padding="40">
+    <Frame Padding="20" BackgroundColor="White" CornerRadius="12">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="Выберите новый статус" FontSize="18" />
+
+            <Picker ItemsSource="{Binding AvailableStatuses}"
+                    SelectedItem="{Binding SelectedStatus}"
+                    Title="Статус" />
+
+            <Button Text="Сохранить" Command="{Binding SubmitStatusCommand}" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentPage>

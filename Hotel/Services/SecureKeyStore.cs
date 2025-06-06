@@ -2,14 +2,35 @@
 
 public static class SecureKeyStore
 {
-    private static string _keyName;
-    
-    public static async Task<bool> HasPrivateKeyAsync(string username)
+    public static bool IsPinEntered { get; set; }
+    private static string _keyName = string.Empty;
+
+
+    public static async Task<bool> HasPrivateKeyAsync()
     {
-        _keyName = username;
+        if (IsPinEntered)
+        {
+            try
+            {
+                var key = await SecureStorage.Default.GetAsync(_keyName);
+                if (key is null) return false;
+                return true;
+            }
+            catch (Exception _)
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public static async Task<bool> HasPrivateKeyAsync(string pin)
+    {
+        _keyName = pin;
         try
         {
-            var key = await SecureStorage.Default.GetAsync(username);
+            var key = await SecureStorage.Default.GetAsync(pin);
             if (key is null) return false;
             return true;
         }
@@ -27,5 +48,11 @@ public static class SecureKeyStore
     public static async Task<string?> LoadPrivateKeyAsync()
     {
         return await SecureStorage.Default.GetAsync(_keyName);
+    }
+
+    public static async Task EnterPin(string pin)
+    {
+        _keyName = pin;
+        IsPinEntered = true;
     }
 }

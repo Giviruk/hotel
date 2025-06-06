@@ -50,8 +50,17 @@ public class RsaEncryptionService : IRsaEncryptionService
 
     public async Task LoadKey()
     {
+        if(_rsa != null) return;
         _rsa = RSA.Create();
+        
         var key = await SecureKeyStore.LoadPrivateKeyAsync();
+        if (string.IsNullOrEmpty(key))
+        {
+            
+            var rsa = new RSACryptoServiceProvider(2048);
+            key = rsa.ExportRSAPrivateKeyPem();
+            await SecureKeyStore.SavePrivateKeyAsync(key);
+        }
         _rsa.ImportFromPem(key.ToCharArray());
     }
 

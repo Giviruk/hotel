@@ -9,18 +9,19 @@ namespace Hotel.View;
 
 public partial class ReservationsPage : ContentPage
 {
-    ReservationsViewModel _reservationsViewModel;
+    private readonly ReservationsViewModel reservationsViewModel;
     public ReservationsPage(ReservationsViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
-        _reservationsViewModel = vm;
+        reservationsViewModel = vm;
+        vm.Navigation = Navigation; // <-- добавь это
     }
 
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        Task.Run(() => _reservationsViewModel.LoadReservations());
+        reservationsViewModel.LoadCommand.Execute(null);
     }
 }

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:converters="clr-namespace:Hotel.Converters"
+             x:Class="Hotel.View.SelectAvailableRoomPage">
+    <VerticalStackLayout Padding="20" Spacing="16">
+        <Label Text="Дата заселения:" />
+        <DatePicker Date="{Binding StartDate}" />
+
+        <Label Text="Дата выезда:" />
+        <DatePicker Date="{Binding EndDate}" />
+
+        <Button Text="Показать комнаты" Command="{Binding ShowAvailableRoomsCommand}" />
+
+        <CollectionView x:Name="RoomsView"
+                        ItemsSource="{Binding AvailableRooms}">
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+                    <Frame BorderColor="Gray" CornerRadius="8" Padding="12">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.BookRoomCommand, Source={x:Reference RoomsView}}"
+                                                  CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding name}" FontAttributes="Bold" />
+                            <Label Text="{Binding categoryName}" />
+                            <Label Text="{Binding color}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

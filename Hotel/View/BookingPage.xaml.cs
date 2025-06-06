@@ -11,21 +11,13 @@ public partial class BookingPage : ContentPage
 {
     private ReservationsPage _reservationsPage;
     
-    public BookingPage(BookingViewModel vm, ReservationsPage reservationsPage)
+    public BookingPage(BookingViewModel vm,  RoomResponseDto availableRoom, DateTime startDate, DateTime endDate)
     {
         InitializeComponent();
         Title = "Book a room";
+        vm.Init(availableRoom, startDate, endDate);
+        vm.Navigation = Navigation;
         BindingContext = vm;
-        
-        _reservationsPage = reservationsPage;
-        
-        ToolbarItems.Add(new ToolbarItem
-        {
-            Text = "Мои брони",
-            Priority = 0,
-            Order = ToolbarItemOrder.Primary,
-            Command = new Command(async () => await Navigation.PushAsync(_reservationsPage))
-        });
     }
     
     protected override void OnAppearing()

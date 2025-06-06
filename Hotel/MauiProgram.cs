@@ -29,6 +29,8 @@ public static class  MauiProgram
         builder.Services.AddSingleton<BookingViewModel>();
         builder.Services.AddSingleton<ReservationsPage>();
         builder.Services.AddSingleton<ReservationsViewModel>();
+        builder.Services.AddSingleton<SelectAvailableRoomViewModel>();
+        builder.Services.AddSingleton<SelectAvailableRoomPage>();
         builder.Services.AddSingleton<IRsaEncryptionService, RsaEncryptionService>();
 
         var container = new CookieContainer();
